@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Navbar, Nav, Container} from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 
 export class Navigation extends Component {
     
