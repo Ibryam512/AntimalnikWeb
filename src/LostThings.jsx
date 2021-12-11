@@ -17,27 +17,29 @@ export class LostThings extends Component {
                 date={date} />);
 	}
 
+    refreshPosts() {
+        fetch(process.env.REACT_APP_API + 'posts')
+        .then(response => response.json())
+        .then(data => {
+            this.setState({posts: data});
+        });
+    }
+
+    componentDidMount() {
+        this.refreshPosts();
+    }
+
+    componentDidUpdate() {
+        this.refreshPosts();
+    }
+
 	render () {
+        const { posts } = this.state;
 	    return (
             <div>
-            <CardGroup>
-                {this.renderPost("Изгубена вещ", "Описание", "22-10-2021")}
-                {this.renderPost("Изгубена вещ", "Описание", "22-10-2021")}
-                {this.renderPost("Изгубена вещ", "Описание", "22-10-2021")}
-            </CardGroup>
-            <CardGroup>
-                {this.renderPost("Изгубена вещ", "Описание", "22-10-2021")}
-                {this.renderPost("Изгубена вещ", "Описание", "22-10-2021")}
-                {this.renderPost("Изгубена вещ", "Описание", "22-10-2021")}
-            </CardGroup>
-            <CardGroup>
-                {this.renderPost("Изгубена вещ", "Описание", "22-10-2021")}
-                {this.renderPost("Изгубена вещ", "Описание", "22-10-2021")}
-                {this.renderPost("Изгубена вещ", "Описание", "22-10-2021")}
-            </CardGroup>
-            <CardGroup>
-                {this.renderPost("Изгубена вещ", "Описание", "22-10-2021")}
-            </CardGroup>
+                <CardGroup>
+                    {posts.map(post => this.renderPost(post.title, post.description, post.addDate))}
+                </CardGroup>
             </div>
 		);
 	}

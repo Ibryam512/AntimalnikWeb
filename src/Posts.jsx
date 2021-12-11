@@ -9,8 +9,25 @@ export class Posts extends Component {
 		  posts: []
 		};
 	  }
+
+    refreshPosts() {
+        fetch(process.env.REACT_APP_API + 'posts')
+        .then(response => response.json())
+        .then(data => {
+            this.setState({posts: data});
+        });
+    }
+
+    componentDidMount() {
+        this.refreshPosts();
+    }
+
+    componentDidUpdate() {
+        this.refreshPosts();
+    }
 	
 	renderPost(title, description, date) {
+        
 		return (<Post
 				title={title}
 				description={description}
@@ -18,26 +35,12 @@ export class Posts extends Component {
 	}
 
 	render () {
+        const { posts } = this.state;
 	    return (
             <div>
-            <CardGroup>
-                {this.renderPost("Обява", "Описание", "22-10-2021")}
-                {this.renderPost("Обява", "Описание", "22-10-2021")}
-                {this.renderPost("Обява", "Описание", "22-10-2021")}
-            </CardGroup>
-            <CardGroup>
-                {this.renderPost("Обява", "Описание", "22-10-2021")}
-                {this.renderPost("Обява", "Описание", "22-10-2021")}
-                {this.renderPost("Обява", "Описание", "22-10-2021")}
-            </CardGroup>
-            <CardGroup>
-                {this.renderPost("Обява", "Описание", "22-10-2021")}
-                {this.renderPost("Обява", "Описание", "22-10-2021")}
-                {this.renderPost("Обява", "Описание", "22-10-2021")}
-            </CardGroup>
-            <CardGroup>
-                {this.renderPost("Обява", "Описание", "22-10-2021")}
-            </CardGroup>
+                <CardGroup>
+                    {posts.map(post => this.renderPost(post.title, post.description, post.addDate))}
+                </CardGroup>
             </div>
 		);
 	}
