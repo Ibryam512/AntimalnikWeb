@@ -1,25 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
 
 import { Posts } from './Posts';
-import { LostThings } from './LostThings';
 import { Messages } from './Messages';
 import { Questions } from './Questions';
-import { Navigation } from './Navigation';
+import { Navigation } from './ui/Navigation';
+import { Login } from './Login';
+import {Registration} from './Registration';
+import { postType } from './enums/postType';
 
 import {BrowserRouter as Router, Route, Routes as Switch} from 'react-router-dom';
 
 
 function App() {
   return (
-    
     <Router>
       <Navigation />
       <Switch>
-        <Route path='/' element={<Posts/>} exact/>
-        <Route path='/lost-things' element={<LostThings/>} />
+        <Route path='/' element={<Posts type={postType.ad}/>} exact/>
+        <Route path='/lost-things' element={<Posts type={postType.lostThing}/>} />
         <Route path='/messages' element={<Messages/>} />
         <Route path='/questions' element={<Questions/>} />
+        <Route path='/login' element={<Login/>} />
+        <Route path='/registration' element={<Registration/>} />
       </Switch>
     </Router>
   );

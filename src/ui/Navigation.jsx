@@ -13,6 +13,8 @@ export class Navigation extends Component {
                         <Nav.Link href="/lost-things">Изгубени вещи</Nav.Link>
                         <Nav.Link href="/messages">Съобщения</Nav.Link>
                         <Nav.Link href="/questions">Въпроси</Nav.Link>
+                        <Nav.Link href="/login">Вход</Nav.Link>
+                        <Nav.Link href="/registration">Регистрация</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
