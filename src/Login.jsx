@@ -49,7 +49,7 @@ export class Login extends Component {
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Row>
-                <Button type="submit">Submit form</Button>
+                <Button type="submit">Влез</Button>
             </Form>
         );
     }

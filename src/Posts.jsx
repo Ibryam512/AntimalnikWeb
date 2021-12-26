@@ -20,11 +20,11 @@ export class Posts extends Component {
     }
 
     componentDidMount() {
-      // this.refreshPosts();
+       this.refreshPosts();
     }
 
     componentDidUpdate() {
-       //this.refreshPosts();
+       this.refreshPosts();
     }
 	
     filterPosts(posts) {
