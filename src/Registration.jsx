@@ -8,14 +8,14 @@ export class Registration extends Component {
         super(props);
         this.state = {
             validated: false,
-            data: new User("", "", "", "")
+            data: new User("", "", "", "", "")
         };
         this.Registration = this.Registration.bind(this);
         this.onChange = this.onChange.bind(this);
     }
 
-    Registration() {
-       
+    Registration(e) {
+        e.preventDefault();       
         const { data } = this.state;
         axios.post(process.env.REACT_APP_API + 'users', data)
             .then((result) => {
@@ -33,7 +33,6 @@ export class Registration extends Component {
                 [e.target.name]: e.target.value
             }
         });
-        console.log(this.state.data);
     }
 
     render() {
@@ -112,10 +111,13 @@ export class Registration extends Component {
                     </Form.Group>
                     <Form.Group as={Col} md="3" controlId="validationCustom04">
                         <Form.Label>Парола</Form.Label>
-                        <Form.Control 
-                        type="password" 
-                        placeholder="Парола" 
-                        required
+                        <Form.Control
+                            type="password"
+                            placeholder="Парола"
+							name="password"
+                            value={data.password}
+                            onChange={this.onChange}
+                            required
                         />
                         <Form.Control.Feedback type="invalid">
                             Моля, напишете парола.
@@ -123,10 +125,10 @@ export class Registration extends Component {
                     </Form.Group>
                     <Form.Group as={Col} md="3" controlId="validationCustom05">
                         <Form.Label>Повтори паролата</Form.Label>
-                        <Form.Control 
-                        type="password" 
-                        placeholder="Повтори паролата" 
-                        required
+                        <Form.Control
+                            type="password"
+                            placeholder="Повтори паролата"
+                            required
                         />
                         <Form.Control.Feedback type="invalid">
                             Моля, повторете паролата.
