@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { CardGroup } from 'react-bootstrap'
+import { CardGroup, Button, ButtonToolbar } from 'react-bootstrap'
+import { AddPost } from './AddPost'
 import Post from './components/Post';
 
 export class Posts extends Component {
@@ -7,7 +8,8 @@ export class Posts extends Component {
 		super(props);
 		this.state = {
 		  posts: [],
-          type: this.props.type
+          type: this.props.type,
+          addPostShow: false
 		};
 	  }
 
@@ -42,11 +44,19 @@ export class Posts extends Component {
 
 	render () {
         const { posts } = this.state;
+        let addPostClose = () => this.setState({addPostShow: false});
 	    return (
             <div>
                 <CardGroup>
                     {posts.map(post => this.renderPost(post.title, post.description, post.addDate))}
                 </CardGroup>
+                <ButtonToolbar>
+                    <Button variant='primary' onClick={() => this.setState({addPostShow: true})}>
+                        Добави обява
+                    </Button>
+                    <AddPost show={this.state.addPostShow}
+                    onHide={addPostClose}/>
+                </ButtonToolbar>
             </div>
 		);
 	}
