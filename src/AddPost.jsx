@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Modal, Button, Row, Col, Form} from 'react-bootstrap';
+import { postType } from './enums/postType';
 import axios from 'axios'; 
 
 export class AddPost extends Component {
     constructor(props) {
         super(props);
+        let userData = JSON.parse(sessionStorage.getItem("userData"));
         this.state = {
             validated: false,
-            data: {title: '', description: '', postType: 0, price: null}
+            data: {title: '', description: '', postType: this.props.postType, price: null, user: userData.userName}
           };
         this.аddPost = this.аddPost.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -16,7 +18,6 @@ export class AddPost extends Component {
     аddPost(e) {
         e.preventDefault();
         const { data } = this.state;
-        alert(data);
         axios.post(process.env.REACT_APP_API + 'posts', data)
             .then((result) => {
                 this.props.onHide();
@@ -33,6 +34,25 @@ export class AddPost extends Component {
                 [e.target.name]: e.target.value
             }
         });
+    }
+
+    renderPriceField() {
+        const { data } = this.state;
+        if (this.props.postType === postType.ad) {
+            return (
+                <Form.Group controlId="PostPrice">
+                    <Form.Label>Цена</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="price"
+                        placeholder="Цена"
+                        value={data.price}
+                        onChange={this.onChange}
+                        required
+                    />
+                </Form.Group>
+            );
+        }
     }
 
     render() {
@@ -75,17 +95,7 @@ export class AddPost extends Component {
                                     required
                                     />
                                 </Form.Group>
-                                <Form.Group controlId="PostPrice">
-                                    <Form.Label>Цена</Form.Label>
-                                    <Form.Control 
-                                    type="text" 
-                                    name="price" 
-                                    placeholder="Цена"
-                                    value={data.price}
-                                    onChange={this.onChange}
-                                    required
-                                    />
-                                </Form.Group>
+                                {this.renderPriceField()}
                                 <Button type="submit">Качи обява</Button>
                                 <Modal.Footer>
                                     <Button variant="danger" onClick={this.props.onHide}>Затвори</Button>

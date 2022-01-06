@@ -6,10 +6,15 @@ import Post from './components/Post';
 export class Posts extends Component {
 	constructor(props) {
 		super(props);
+        let ifLogged = false;
+        if (sessionStorage.getItem("userData") !== null) {
+            ifLogged = true;
+        }
 		this.state = {
 		  posts: [],
           type: this.props.type,
-          addPostShow: false
+          addPostShow: false,
+          logged: ifLogged
 		};
 	  }
 
@@ -42,21 +47,32 @@ export class Posts extends Component {
                 date={date} />);
 	}
 
-	render () {
-        const { posts } = this.state;
+    renderButton() {
+        const { logged } = this.state;
         let addPostClose = () => this.setState({addPostShow: false});
-	    return (
-            <div>
-                <CardGroup>
-                    {posts.map(post => this.renderPost(post.title, post.description, post.addDate))}
-                </CardGroup>
+        if (logged) {
+            return (
                 <ButtonToolbar>
                     <Button variant='primary' onClick={() => this.setState({addPostShow: true})}>
                         Добави обява
                     </Button>
                     <AddPost show={this.state.addPostShow}
-                    onHide={addPostClose}/>
+                    onHide={addPostClose}
+                    postType={this.props.type}/>
                 </ButtonToolbar>
+            );
+        }
+    }
+
+	render () {
+        const { posts } = this.state;
+
+	    return (
+            <div>
+                <CardGroup>
+                    {posts.map(post => this.renderPost(post.title, post.description, post.addDate))}
+                </CardGroup>
+                {this.renderButton()}
             </div>
 		);
 	}

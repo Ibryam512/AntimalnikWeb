@@ -16,7 +16,6 @@ export class Login extends Component {
     Login(e) {
         e.preventDefault();
         const { data } = this.state;
-        alert(data);
         axios.post(process.env.REACT_APP_API + 'users/login', data)
             .then((result) => {
                 if (result.data.status == '200') {
