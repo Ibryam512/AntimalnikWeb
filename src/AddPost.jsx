@@ -9,7 +9,7 @@ export class AddPost extends Component {
         let userData = JSON.parse(sessionStorage.getItem("userData"));
         this.state = {
             validated: false,
-            data: {title: '', description: '', postType: this.props.postType, price: null, user: userData.userName}
+            data: {title: '', description: '', postType: this.props.postType, price: 0, user: userData.userName}
           };
         this.аddPost = this.аddPost.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -18,6 +18,7 @@ export class AddPost extends Component {
     аddPost(e) {
         e.preventDefault();
         const { data } = this.state;
+        alert(data.user);
         axios.post(process.env.REACT_APP_API + 'posts', data)
             .then((result) => {
                 this.props.onHide();
