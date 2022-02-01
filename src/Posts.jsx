@@ -39,12 +39,14 @@ export class Posts extends Component {
         return filtered;
     }
 
-	renderPost(title, description, date) {
+	renderPost(id, title, description, date) {
         
 		return (<Post
+                id={id}
 				title={title}
 				description={description}
-                date={date} />);
+                date={date} 
+                />);
 	}
 
     renderButton() {
@@ -70,7 +72,7 @@ export class Posts extends Component {
 	    return (
             <div>
                 <CardGroup>
-                    {posts.map(post => this.renderPost(post.title, post.description, post.addDate))}
+                    {posts.map(post => this.renderPost(post.id, post.title, post.description, post.addDate))}
                 </CardGroup>
                 {this.renderButton()}
             </div>

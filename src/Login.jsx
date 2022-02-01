@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Form, Row, Col, InputGroup, Button } from 'react-bootstrap'
+import { Form, Row, Col, InputGroup, Button } from 'react-bootstrap'
 import axios from 'axios'; 
 
 export class Login extends Component {
@@ -20,6 +20,7 @@ export class Login extends Component {
             .then((result) => {
                 if (result.data.status == '200') {
                     sessionStorage.setItem('userData', JSON.stringify(result.data.userDetails));
+                    sessionStorage.setItem('userPosts', JSON.stringify(result.data.userDetails.posts));
                     alert(sessionStorage.getItem('userData'));
                 }
                 else {

@@ -8,9 +8,8 @@ import { Login } from './Login';
 import { Registration } from './Registration';
 import { Profile } from './Profile';
 import { postType } from './enums/postType';
-
 import { BrowserRouter as Router, Route, Routes as Switch } from 'react-router-dom';
-
+import GetId from './FullPost';
 
 function App() {
   return (
@@ -24,6 +23,7 @@ function App() {
         <Route path='/login' element={<Login/>} />
         <Route path='/registration' element={<Registration/>} />
         <Route path='/profile' element={<Profile/>} />
+        <Route path='/posts/:id' element={<GetId/>} />
       </Switch>
     </Router>
   );
