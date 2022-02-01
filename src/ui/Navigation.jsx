@@ -1,20 +1,37 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export class Navigation extends Component {
     
+    showUserPage() {
+        let userData = JSON.parse(sessionStorage.getItem("userData"));
+        if (userData !== null) {
+            return (
+                <Nav.Link as={Link} to="/profile">Здравей, {userData.userName}</Nav.Link>
+            );
+        }
+        else {
+            return (
+                [
+                    <Nav.Link as={Link} to="/login">Вход</Nav.Link>,
+                    <Nav.Link as={Link} to="/registration">Регистрация</Nav.Link>
+                ]
+            );
+        }
+    }
+
     render() {
         return(
             <Navbar bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="#home">Антималник</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Обяви</Nav.Link>
-                        <Nav.Link href="/lost-things">Изгубени вещи</Nav.Link>
-                        <Nav.Link href="/messages">Съобщения</Nav.Link>
-                        <Nav.Link href="/questions">Въпроси</Nav.Link>
-                        <Nav.Link href="/login">Вход</Nav.Link>
-                        <Nav.Link href="/registration">Регистрация</Nav.Link>
+                        <Nav.Link as={Link} to="/">Обяви</Nav.Link>
+                        <Nav.Link as={Link} to="/lost-things">Изгубени вещи</Nav.Link>
+                        <Nav.Link as={Link} to="/messages">Съобщения</Nav.Link>
+                        <Nav.Link as={Link} to="/questions">Въпроси</Nav.Link>
+                        {this.showUserPage()}
                     </Nav>
                 </Container>
             </Navbar>

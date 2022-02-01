@@ -5,10 +5,11 @@ import { Messages } from './Messages';
 import { Questions } from './Questions';
 import { Navigation } from './ui/Navigation';
 import { Login } from './Login';
-import {Registration} from './Registration';
+import { Registration } from './Registration';
+import { Profile } from './Profile';
 import { postType } from './enums/postType';
 
-import {BrowserRouter as Router, Route, Routes as Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes as Switch } from 'react-router-dom';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/questions' element={<Questions/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/registration' element={<Registration/>} />
+        <Route path='/profile' element={<Profile/>} />
       </Switch>
     </Router>
   );
