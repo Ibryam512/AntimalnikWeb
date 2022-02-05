@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { CardGroup, Button, ButtonToolbar } from 'react-bootstrap'
-import { AddPost } from './AddPost'
+import { CardGroup, Button, ButtonToolbar } from 'react-bootstrap';
+import { AddPost } from './AddPost';
 import Post from './components/Post';
 
 export class Posts extends Component {

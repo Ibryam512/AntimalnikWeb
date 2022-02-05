@@ -19,8 +19,7 @@ export class Registration extends Component {
         const { data } = this.state;
         axios.post(process.env.REACT_APP_API + 'users', data)
             .then((result) => {
-                console.log(result)
-                this.props.history.push('/')
+                console.log(result);
             })
         
     }  
