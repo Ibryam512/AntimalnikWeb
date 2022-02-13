@@ -23,7 +23,7 @@ export class Navigation extends Component {
 
     render() {
         return(
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
                 <Container>
                     <Navbar.Brand href="#home">Антималник</Navbar.Brand>
                     <Nav className="me-auto">
@@ -31,6 +31,8 @@ export class Navigation extends Component {
                         <Nav.Link as={Link} to="/lost-things">Изгубени вещи</Nav.Link>
                         <Nav.Link as={Link} to="/messages">Съобщения</Nav.Link>
                         <Nav.Link as={Link} to="/questions">Въпроси</Nav.Link>
+                    </Nav>
+                    <Nav>
                         {this.showUserPage()}
                     </Nav>
                 </Container>

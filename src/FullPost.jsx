@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { useParams } from 'react-router-dom';
-import { CardGroup, Button, ButtonToolbar } from 'react-bootstrap'
+import { Button, ButtonToolbar } from 'react-bootstrap'
 import { SendMessage } from './SendMessage'
 
 export default function GetId() {
@@ -50,7 +50,7 @@ export class FullPost extends Component {
             let userName = JSON.parse(sessionStorage.getItem("userData")).userName;
             return (
                 <ButtonToolbar>
-                    <Button variant='primary' onClick={() => this.setState({sendMessageShow: true})}>
+                    <Button variant='outline-primary' className="post-message-button" onClick={() => this.setState({sendMessageShow: true})}>
                         Прати съобщение
                     </Button>
                     <SendMessage show={this.state.sendMessageShow}
@@ -66,16 +66,12 @@ export class FullPost extends Component {
         const { post } = this.state;
 
 	    return (
-            <div>
-                <CardGroup>
-                    <h1>{post.title}</h1>
-                    <p>{post.description}</p>
-                    <p>{post.user.userName}</p><br/>
-                    {this.renderSendMessageButton()}
-                </CardGroup>
+            <div className="post">
+                <h1 className="post-item">{post.title}</h1>
+                <p className="post-item">{post.description}</p>
+                <p className="post-item"><b>{post.user.userName}</b></p>
+                {this.renderSendMessageButton()}
             </div>
 		);
 	}
-
-	
 }

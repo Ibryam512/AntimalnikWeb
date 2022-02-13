@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Modal, Button, Row, Col, Form} from 'react-bootstrap';
-import { postType } from './enums/postType';
 import axios from 'axios'; 
 
 export class SendMessage extends Component {
@@ -41,23 +40,22 @@ export class SendMessage extends Component {
         return (
             <Modal
             {...this.props}
-            size="lg"
             aria-tabelledby="contained-modal-title-vcenter"
             centered
             >
                 <Modal.Header clooseButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
+                    <Modal.Title id="contained-modal-title-vcenter" style={{margin: "0 auto"}}>
                     Прати съобщение
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
-                        <Col sm={6}>
+                        <Col sm={12}>
                             <Form onSubmit={this.sendMessage}>
-                                <Form.Group controlId="PostReciever">
+                                <Form.Group controlId="MessageReciever" className="add-edit-post">
                                     <Form.Label>До: {this.props.reciever}</Form.Label>
                                 </Form.Group>
-                                 <Form.Group controlId="PostMessage">
+                                 <Form.Group controlId="Message" className="add-edit-post">
                                     <Form.Label>Съобщение</Form.Label>
                                     <Form.Control 
                                     type="text" 
@@ -68,7 +66,7 @@ export class SendMessage extends Component {
                                     required
                                     />
                                 </Form.Group>
-                                <Button type="submit">Прати съобщение</Button>
+                                <Button type="submit" className="add-edit-post">Прати съобщение</Button>
                                 <Modal.Footer>
                                     <Button variant="danger" onClick={this.props.onHide}>Затвори</Button>
                                 </Modal.Footer>

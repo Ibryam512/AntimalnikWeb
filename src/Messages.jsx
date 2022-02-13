@@ -7,8 +7,12 @@ export class Messages extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-            messages: []
+            messages: [],
+            logged: false
 		};
+        if (sessionStorage.getItem("userData") !== null) {
+            this.state.logged = true;
+        }
 	}
 
     refreshMessages() {
@@ -21,11 +25,15 @@ export class Messages extends Component {
     }
 
     componentDidMount() {
-       this.refreshMessages();
+        if (this.state.logged === true) {
+            this.refreshMessages();
+        }
     }
 
     componentDidUpdate() {
-       this.refreshMessages();
+        if (this.state.logged === true) {
+            this.refreshMessages();
+        }
     }
 
 	renderMessage(id, sender, reciever, text, date) {

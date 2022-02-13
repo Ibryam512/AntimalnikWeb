@@ -1,38 +1,102 @@
-.App {
-  text-align: center;
+body {
+    background: #654ea3;
+    background: linear-gradient(to right, #38C27A, #2ebbdf);
+    overflow-x: hidden
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.form {
+	align-items: center;
+    background: rgb(219, 219, 219);
+	height: 100%;
+	width: 40%;	
+	box-shadow: 0px 0px 24px #5C5696;
+	padding-top: 2%;
+    padding-bottom: 2%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.item {
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.item-button {
+	width: 30%;
+	margin-left: 35%;
 }
 
-.App-link {
-  color: #61dafb;
+.link {
+	text-decoration: none;
+	color: #0B5ED7;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.add-edit-post {
+	margin-bottom: 3%;
+}
+
+.profile {
+	align-items: center;
+    background: rgb(248, 241, 241);
+	height: 100%;
+	width: 70%;	
+	box-shadow: 0px 0px 24px #5C5696;
+	padding-top: 2%;
+    padding-bottom: 2%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
+}
+
+.questions {
+    background: rgb(248, 241, 241);
+	height: 30%;
+	width: 80%;
+	box-shadow: 0px 0px 24px #5C5696;
+	padding-top: 2%;
+    padding-bottom: 2%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
+	padding-top: 20%;
+}
+
+.post {
+	align-items: center;
+    background: rgb(248, 241, 241);
+	height: 100%;
+	width: 70%;	
+	box-shadow: 0px 0px 24px #5C5696;
+	padding-top: 2%;
+    padding-bottom: 2%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
+}
+
+.post-item {
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+.post-message-button {
+	width: 30%;
+	margin-left: 35%;
+}
+
+.question {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.message {
+	transform: translate(100%, 50%);
+	width: 31.25em;
+	height: 9.375em;
 }

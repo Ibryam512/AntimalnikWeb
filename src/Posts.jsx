@@ -40,7 +40,6 @@ export class Posts extends Component {
     }
 
 	renderPost(id, title, description, date) {
-        
 		return (<Post
                 id={id}
 				title={title}
@@ -56,7 +55,7 @@ export class Posts extends Component {
             return (
                 <ButtonToolbar>
                     <Button variant='primary' onClick={() => this.setState({addPostShow: true})}>
-                        Добави обява
+                        Добави пост
                     </Button>
                     <AddPost show={this.state.addPostShow}
                     onHide={addPostClose}
@@ -72,7 +71,10 @@ export class Posts extends Component {
 	    return (
             <div>
                 <CardGroup>
-                    {posts.map(post => this.renderPost(post.id, post.title, post.description, post.addDate))}
+                    {   posts.length > 0
+                        ? posts.map(post => this.renderPost(post.id, post.title, post.description, post.addDate))
+                        : <p style={{margin: "0 auto"}}>Няма качени постове.</p>
+                    }
                 </CardGroup>
                 {this.renderButton()}
             </div>

@@ -9,7 +9,7 @@ export class AddPost extends Component {
         let userData = JSON.parse(sessionStorage.getItem("userData"));
         this.state = {
             validated: false,
-            data: {title: '', description: '', postType: this.props.postType, price: 0, user: userData.userName}
+            data: {title: '', description: '', postType: this.props.postType, price: 0, userName: userData.userName}
           };
         this.аddPost = this.аddPost.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -18,10 +18,10 @@ export class AddPost extends Component {
     аddPost(e) {
         e.preventDefault();
         const { data } = this.state;
+        data.postType = this.props.postType;
         axios.post(process.env.REACT_APP_API + 'posts', data)
-            .then((result) => {
+            .then(() => {
                 this.props.onHide();
-                alert(result);
             });
         let userData = JSON.parse(sessionStorage.getItem("userData"));
         userData.posts.push(data);
@@ -43,7 +43,7 @@ export class AddPost extends Component {
         const { data } = this.state;
         if (this.props.postType === postType.ad) {
             return (
-                <Form.Group controlId="PostPrice">
+                <Form.Group controlId="PostPrice" className="add-edit-post">
                     <Form.Label>Цена</Form.Label>
                     <Form.Control
                         type="text"
@@ -63,20 +63,20 @@ export class AddPost extends Component {
         return (
             <Modal
             {...this.props}
-            size="lg"
             aria-tabelledby="contained-modal-title-vcenter"
             centered
+            
             >
                 <Modal.Header clooseButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                    Добави обява
+                    <Modal.Title id="contained-modal-title-vcenter" style={{margin: "0 auto"}}>
+                    {(this.props.postType === postType.ad ? "Добави обява" : "Добави изгубена вещ")}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
-                        <Col sm={6}>
+                        <Col sm={12}>
                             <Form onSubmit={this.аddPost}>
-                                <Form.Group controlId="PostTitle">
+                                <Form.Group controlId="PostTitle" className="add-edit-post">
                                     <Form.Label>Заглавие</Form.Label>
                                     <Form.Control 
                                     type="text" 
@@ -87,7 +87,7 @@ export class AddPost extends Component {
                                     required
                                     />
                                 </Form.Group>
-                                 <Form.Group controlId="PostDescription">
+                                 <Form.Group controlId="PostDescription" className="add-edit-post">
                                     <Form.Label>Описание</Form.Label>
                                     <Form.Control 
                                     type="text" 
@@ -99,7 +99,9 @@ export class AddPost extends Component {
                                     />
                                 </Form.Group>
                                 {this.renderPriceField()}
-                                <Button type="submit">Качи обява</Button>
+                                <Button type="submit" className="add-edit-post">
+                                    {this.props.postType === postType.ad ? "Качи обява" : "Качи изгубена вещ"}
+                                </Button>
                                 <Modal.Footer>
                                     <Button variant="danger" onClick={this.props.onHide}>Затвори</Button>
                                 </Modal.Footer>
