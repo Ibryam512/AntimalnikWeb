@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button, Row, Col, Form} from 'react-bootstrap';
-import { postType } from './enums/postType';
+import { postType } from './../enums/postType';
 import axios from 'axios'; 
 
 export class EditPost extends Component {
@@ -29,9 +29,8 @@ export class EditPost extends Component {
     deletePost(e) {
         e.preventDefault();
         axios.delete(process.env.REACT_APP_API + 'posts/' + this.state.data.id)
-            .then((result) => {
+            .then(() => {
                 this.props.onHide();
-                alert(result);
             });
         window.location.reload();
     }

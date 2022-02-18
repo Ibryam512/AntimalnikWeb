@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button, Row, Col, Form} from 'react-bootstrap';
-import { postType } from './enums/postType';
+import { postType } from './../enums/postType';
 import axios from 'axios'; 
 
 export class AddPost extends Component {

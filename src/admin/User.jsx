@@ -1,17 +1,34 @@
 import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-import Post from './components/Post';
-import './App.css';
+import { Navigate, useParams } from 'react-router-dom';
+import Post from './../posts/Post';
+import './../App.css';
+
+export default function GetUserName() {
+    const { userName } = useParams();
+
+    return (
+        <div>
+            <User userName={userName} />
+        </div>
+    );
+}
 
 
-export class Profile extends Component {
+export class User extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: JSON.parse(sessionStorage.getItem("userData")),
+            user: {userName: "", firstName: "", lastName: ""},
             posts: []
         }
+    }
+
+    getUser() {
+        fetch(process.env.REACT_APP_API + 'users/' + this.props.userName)
+        .then(response => response.json())
+        .then(data => {
+            this.setState({user: data});
+        });
     }
 
     refreshPosts() {
@@ -24,21 +41,17 @@ export class Profile extends Component {
     }
 
     componentDidMount() {
+        this.getUser();
         if (this.state.user !== null) {
             this.refreshPosts();
         }
     }
 
     componentDidUpdate() {
+        this.getUser();
         if (this.state.user !== null) {
             this.refreshPosts();
         }
-    }
-	
-    logOut() {
-        sessionStorage.removeItem("userData");
-        window.location.reload();
-        <Navigate to="/login" />
     }
 
     renderPost(post) {
@@ -49,7 +62,7 @@ export class Profile extends Component {
                 description={post.description}
                 date={post.addDate}
                 post={post}
-                edit={true} 
+                edit={false} 
                 className="post"/>
         );
 	}
@@ -59,15 +72,15 @@ export class Profile extends Component {
         if (userData === null) {
             return <Navigate to='/login'/>
         }
-        const { posts } = this.state;
+        const { posts, user } = this.state;
 
         return (
             <div class="row py-5 px-4">
                 <div class="col-md-8 mx-auto">
                     <div class="bg-white shadow rounded overflow-hidden">
                         <div class="bg-light p-4 text-center">
-                            <h4 class="mt-0 mb-0">{userData.firstName} {userData.lastName}</h4>
-                            <p class="small mb-4">{userData.userName}</p>
+                            <h4 class="mt-0 mb-0">{user.firstName} {user.lastName}</h4>
+                            <p class="small mb-4">{user.userName}</p>
                         </div>
                         <div class="bg-light p-4 d-flex  justify-content-center text-center">
                             <ul class="list-inline mb-0">
@@ -87,10 +100,9 @@ export class Profile extends Component {
                                 {
                                     posts.length > 0
                                     ? posts.map(post => this.renderPost(post))
-                                    : <p style={{margin: "0 auto"}}>Няма качени постове.</p>
+                                    : <p style={{margin: "0 auto"}}>Този потребител няма качени постове.</p>
                                 }
                             </div>
-                            <Button variant="outline-secondary" onClick={this.logOut}>Изход</Button>
                         </div>
                     </div>
                 </div>

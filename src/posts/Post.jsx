@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, ButtonToolbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { EditPost } from './../EditPost';
+import { EditPost } from './EditPost';
 import './../App.css';
 
 export default class Post extends Component {

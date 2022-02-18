@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { useParams } from 'react-router-dom';
-import { Button, ButtonToolbar } from 'react-bootstrap'
-import { SendMessage } from './SendMessage'
+import axios from 'axios';
+import { useParams, Navigate } from 'react-router-dom';
+import { Button, ButtonToolbar } from 'react-bootstrap';
+import { SendMessage } from './../messages/SendMessage';
+import { roleType } from './../enums/roleType';
 
 export default function GetId() {
     const { id } = useParams();
@@ -16,15 +18,14 @@ export default function GetId() {
 export class FullPost extends Component {
 	constructor(props) {
 		super(props);
-        let ifLogged = false;
-        if (sessionStorage.getItem("userData") !== null) {
-            ifLogged = true;
-        }
         this.state = {
             post: {title: "", description: "", user: {userName: ""}},
             sendMessageShow: false,
-            logged: ifLogged
-          };
+            logged: false
+        };
+        if (sessionStorage.getItem("userData") !== null) {
+            this.state.logged = true;
+        }
     }
 
     getPost() {
@@ -33,6 +34,14 @@ export class FullPost extends Component {
         .then(data => {
             this.setState({post: data});
         });
+    }
+
+    deletePost(e) {
+        e.preventDefault();
+        axios.delete(process.env.REACT_APP_API + 'posts/' + this.props.id)
+            .then(() => {
+                return <Navigate to="/"/>
+            });
     }
 
     componentDidMount() {
@@ -62,6 +71,17 @@ export class FullPost extends Component {
         }
     }
 
+    renderDeletePostButton() {
+        let userData = JSON.parse(sessionStorage.getItem("userData"));
+        if (userData !== null && (userData.role === roleType.user)) {
+            return (
+                <Button variant='outline-danger' style={{marginTop: "2%"}} className="post-message-button" onClick={this.deletePost}>
+                    Изтрий пост
+                </Button>
+            )
+        }
+    }
+
 	render () {
         const { post } = this.state;
 
@@ -71,6 +91,7 @@ export class FullPost extends Component {
                 <p className="post-item">{post.description}</p>
                 <p className="post-item"><b>{post.user.userName}</b></p>
                 {this.renderSendMessageButton()}
+                {this.renderDeletePostButton()}
             </div>
 		);
 	}

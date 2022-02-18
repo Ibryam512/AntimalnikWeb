@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Form, Row, Col, InputGroup, Button } from 'react-bootstrap'
 import axios from 'axios';
-import './App.css';
+import './../App.css';
 
 export class Login extends Component {
     constructor(props) {

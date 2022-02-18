@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Row, Col, InputGroup, Button } from 'react-bootstrap';
 import axios from 'axios';
-import './App.css';
+import './../App.css';
 
 export class Registration extends Component {
     constructor(props) {

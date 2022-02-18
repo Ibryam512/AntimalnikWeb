@@ -1,7 +1,5 @@
 export const roleType = {
   user: 0,
-  student: 1,
-  teacher: 2,
-  principal: 4,
-  admin: 8
+  moderator: 1,
+  admin: 2
 };

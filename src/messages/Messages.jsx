@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import  { Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-bootstrap'
-import Message from './components/Message';
+import Message from './Message';
 
 export class Messages extends Component {
 	constructor(props) {
