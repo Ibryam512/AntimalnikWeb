@@ -26,6 +26,8 @@ export class FullPost extends Component {
         if (sessionStorage.getItem("userData") !== null) {
             this.state.logged = true;
         }
+
+        this.deletePost = this.deletePost.bind(this);
     }
 
     getPost() {
@@ -40,15 +42,21 @@ export class FullPost extends Component {
         e.preventDefault();
         axios.delete(process.env.REACT_APP_API + 'posts/' + this.props.id)
             .then(() => {
-                return <Navigate to="/"/>
+                window.location.reload();
             });
     }
 
     componentDidMount() {
+        if (this.state.post === null) {
+            return <Navigate to="/"/>
+        }
         this.getPost();
     }
 
     componentDidUpdate() {
+        if (this.state.post === null) {
+            return <Navigate to="/"/>
+        }
         this.getPost();
     }
 

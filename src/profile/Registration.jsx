@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Navigate } from 'react-router-dom';
 import { Form, Row, Col, InputGroup, Button } from 'react-bootstrap';
 import axios from 'axios';
 import './../App.css';
@@ -63,6 +64,10 @@ export class Registration extends Component {
     render() {
         const { validated } = this.state;
         const { data } = this.state;
+
+        if (JSON.parse(sessionStorage.getItem("userData")) !== null) {
+            return <Navigate to="/profile" />
+        }
 
         return (
             <Form noValidate validated={validated} onSubmit={this.Registration} className="form">

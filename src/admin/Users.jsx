@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { CardGroup } from 'react-bootstrap';
+import { UserDesign } from './UserDesign';
 import { roleType } from './../enums/roleType';
 
 export class Users extends Component {
@@ -19,7 +20,7 @@ export class Users extends Component {
         }
 	  }
 
-    refreshPosts() {
+    refreshUsers() {
         fetch(process.env.REACT_APP_API + 'users')
         .then(response => response.json())
         .then(data => {
@@ -28,23 +29,16 @@ export class Users extends Component {
     }
 
     componentDidMount() {
-       this.refreshPosts();
+       this.refreshUsers();
     }
 
     componentDidUpdate() {
-       this.refreshPosts();
+       this.refreshUsers();
     }
 
 	renderUser(user) {
-        let link = `users/${user.userName}`;
 		return (
-            <div className="user">
-                <p>{user.userName}</p>
-                <span>{user.firstName} {user.lastName}</span>
-                <p>{user.email}</p>
-                <p>{(user.role === roleType.user ? "Потребител" : (user.role === roleType.moderator ? "Модератор" : "Админ"))}</p>
-                <a href={link}>Детайли</a>
-            </div>
+            <UserDesign user={user} />
         );
 	}
 

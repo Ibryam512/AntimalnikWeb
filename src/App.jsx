@@ -11,6 +11,7 @@ import { Profile } from './profile/Profile';
 import { postType } from './enums/postType';
 import GetId from './posts/FullPost';
 import GetUserId from './admin/User';
+import PageNotFound from './404-page';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='/posts/:id' element={<GetId/>} />
         <Route path='/admin/users' element={<Users/>} />
         <Route path='/admin/users/:userName' element={<GetUserId/>} />
+        <Route path='*' element={<PageNotFound/>} />
       </Switch>
     </Router>
   );

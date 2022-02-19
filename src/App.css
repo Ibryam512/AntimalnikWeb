@@ -29,9 +29,13 @@ body {
 	margin-left: 35%;
 }
 
-.link {
+.link, .link-user {
 	text-decoration: none;
 	color: #0B5ED7;
+}
+
+.link:hover, .link-user:hover {
+	color: #1b4583;
 }
 
 .add-edit-post {
@@ -77,6 +81,7 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 5%;
+	border-radius: 20px;
 }
 
 .post-item {
@@ -111,5 +116,56 @@ body {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 5%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	border-radius: 20px;
+}
+
+.userName {
+	text-align: center;
+	font-size: 25px;
+}
+
+.names, .email, .role, .link-user {
+	text-align: center;
+	font-size: 20px;
+}
+
+.left {
+	float: left;
+	margin-left: 5%;
+}
+
+.right {
+	float: right;
+	margin-right: 5%;
+}
+
+.button {
+	margin-right: 2%;
+	width: 20%;
+}
+
+.not-found {
+	background: rgb(248, 241, 241);
+	height: 70%;
+	width: 70%;	
+	box-shadow: 0px 0px 24px #5C5696;
+	padding-top: 2%;
+    padding-bottom: 2%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10%;
+	border-radius: 20px;
+}
+
+.title {
+	font-size: 60px;
+	text-align: center;
+}
+
+.info {
+	font-size: 25px;
+	text-align: center;
 }

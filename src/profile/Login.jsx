@@ -60,6 +60,10 @@ export class Login extends Component {
         const { validated } = this.state;
         const { data } = this.state;
 
+        if (JSON.parse(sessionStorage.getItem("userData")) !== null) {
+            return <Navigate to="/profile" />
+        }
+        
         return (
             <Form noValidate validated={validated} onSubmit={this.Login} className="form">
                 <h1 className="item">Вход</h1>
