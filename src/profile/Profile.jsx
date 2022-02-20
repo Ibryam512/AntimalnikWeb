@@ -74,7 +74,10 @@ export class Profile extends Component {
                                 <li class="list-inline-item">
                                     <h5 class="font-weight-bold mb-0 d-block">{posts.length}</h5>
                                     <small class="text-muted"> 
-                                        <i class="fas fa-image mr-1"></i>публикувани поста
+                                        <i class="fas fa-image mr-1"></i>
+                                        {(posts.length === 1) 
+                                        ? "публикуван пост" 
+                                        : "публикувани поста"}
                                     </small>
                                 </li>
                             </ul>

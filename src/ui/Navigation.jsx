@@ -24,7 +24,7 @@ export class Navigation extends Component {
 
     showPageWithUsers() {
         let userData = JSON.parse(sessionStorage.getItem("userData"));
-        if (userData !== null && userData.role === roleType.user) {
+        if (userData !== null && userData.role !== roleType.user) {
             return (
                 <Nav.Link as={Link} to="/admin/users">Потребители</Nav.Link>
             );

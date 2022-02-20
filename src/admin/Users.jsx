@@ -44,7 +44,7 @@ export class Users extends Component {
 
 	render () {
         const { users, logged, role } = this.state;
-        if (logged && role === roleType.user) {
+        if (logged && role !== roleType.user) {
             return (
                 <div>
                     <CardGroup>
@@ -56,7 +56,7 @@ export class Users extends Component {
                 </div>
             );
         }
-        else if (logged && role !== roleType.user) {
+        else if (logged && role === roleType.user) {
             return (
                 <p>Трябва да си модератор или админ, за да имаш достъп до тази страница.</p>
             );

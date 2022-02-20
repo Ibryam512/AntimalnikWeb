@@ -109,7 +109,7 @@ body {
 .user {
     background: rgb(248, 241, 241);
 	height: 10%;
-	width: 70%;	
+	width: 40%;	
 	box-shadow: 0px 0px 24px #5C5696;
 	padding-top: 2%;
     padding-bottom: 2%;
@@ -126,24 +126,16 @@ body {
 	font-size: 25px;
 }
 
-.names, .email, .role, .link-user {
+.names, .email, .role {
 	text-align: center;
 	font-size: 20px;
 }
 
-.left {
-	float: left;
-	margin-left: 5%;
-}
 
-.right {
-	float: right;
-	margin-right: 5%;
-}
-
-.button {
-	margin-right: 2%;
-	width: 20%;
+.button, .link-user {
+	width: 50%;
+	margin-left: 25%;
+	margin-top: 2%;
 }
 
 .not-found {

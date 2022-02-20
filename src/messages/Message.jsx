@@ -13,7 +13,7 @@ export default class Message extends Component {
                     <strong className="me-auto">{this.props.sender}</strong>
                     <small className="text-muted">{showDate}</small>
                 </Toast.Header>
-                <Toast.Body>{this.props.text}</Toast.Body>
+                <Toast.Body>{(this.props.text.length < 100 ? this.props.text : this.props.text.slice(0,100) + "...")}</Toast.Body>
             </Toast >
 		);
 	}

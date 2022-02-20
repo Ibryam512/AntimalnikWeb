@@ -27,28 +27,34 @@ export class UserDesign extends Component {
         axios.delete(process.env.REACT_APP_API + 'users/' + this.props.user.userName);
     }
 
+    printButtons() {
+        if (this.props.user.role !== roleType.admin) {
+            return(
+                <ButtonToolbar>
+                    <Button variant="outline-primary" className="button" onClick={this.upgradeUser}>{(this.props.user.role === roleType.user ? "Направи модератор" : "Направи потребител")}</Button>
+                    <Button variant="outline-danger" className="button" onClick={this.deleteUser}>Изтрий потребител</Button>
+                </ButtonToolbar>
+            );
+        }
+    }
+
 	render () {
         let link = `users/${this.props.user.userName}`;
         let user = this.props.user;
         return (
             <div className="user">
                 <p className="userName"><b>{user.userName}</b></p>
-                <div className="left">
-                    <p className="names">{user.firstName} {user.lastName}</p>
-                    <p className="email">Имейл: {user.email}</p>
-                </div>
-                <div className="right">
-                    <p className="role">Роля -
-                        <b>{(user.role === roleType.user
-                            ? "Потребител"
-                            : (user.role === roleType.moderator
-                                ? "Модератор"
-                                : "Админ"))}</b>
-                    </p>
-                    <a href={link} className="link-user">Детайли</a>
-                </div>
-                <Button variant="outline-primary" className="button" onClick={this.upgradeUser}>{(user.role === roleType.user ? "Направи модератор" : "Направи потребител")}</Button>
-                <Button variant="outline-danger" className="button" onClick={this.deleteUser}>Изтрий потребител</Button>
+                <p className="names">{user.firstName} {user.lastName}</p>
+                <p className="email">Имейл: {user.email}</p>
+                <p className="role">Роля -
+                    <b>{(user.role === roleType.user
+                        ? "Потребител"
+                        : (user.role === roleType.moderator
+                            ? "Модератор"
+                            : "Админ"))}</b>
+                </p>
+                <a href={link} className="link-user">Детайли</a>
+                {this.printButtons()}
             </div>
         );
 	}

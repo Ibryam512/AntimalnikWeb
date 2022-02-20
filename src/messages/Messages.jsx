@@ -17,7 +17,7 @@ export class Messages extends Component {
 
     refreshMessages() {
 		let userName = JSON.parse(sessionStorage.getItem("userData")).userName;
-        fetch(process.env.REACT_APP_API + 'messages/' + userName + '/sent')
+        fetch(process.env.REACT_APP_API + 'messages/' + userName + '/recieved')
         .then(response => response.json())
         .then(data => {
             this.setState({messages: data});
@@ -53,6 +53,9 @@ export class Messages extends Component {
         }
 
         const { messages } = this.state;
+        messages.sort((a, b) => {
+            return new Date(b.sentDate) - new Date(a.sentDate)
+        });
 	    return (
             <div>
                 <ToastContainer>
