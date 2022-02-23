@@ -4,6 +4,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { SendMessage } from './../messages/SendMessage';
 import { roleType } from './../enums/roleType';
+import { url } from './../utils/auth';
 
 export default function GetId() {
     const { id } = useParams();
@@ -31,7 +32,7 @@ export class FullPost extends Component {
     }
 
     getPost() {
-        fetch(process.env.REACT_APP_API + 'posts/' + this.props.id)
+        fetch(url + 'posts/' + this.props.id)
         .then(response => response.json())
         .then(data => {
             this.setState({post: data});
@@ -40,7 +41,7 @@ export class FullPost extends Component {
 
     deletePost(e) {
         e.preventDefault();
-        axios.delete(process.env.REACT_APP_API + 'posts/' + this.props.id)
+        axios.delete(url + 'posts/' + this.props.id)
             .then(() => {
                 window.location.reload();
             });

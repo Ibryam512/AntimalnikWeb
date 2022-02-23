@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import Post from './../posts/Post';
+import { url } from './../utils/auth';
 import './../App.css';
 
 export default function GetUserName() {
@@ -24,7 +25,7 @@ export class User extends Component {
     }
 
     getUser() {
-        fetch(process.env.REACT_APP_API + 'users/' + this.props.userName)
+        fetch(url + 'users/' + this.props.userName)
         .then(response => response.json())
         .then(data => {
             this.setState({user: data});
@@ -33,7 +34,7 @@ export class User extends Component {
 
     refreshPosts() {
         const { user } = this.state;
-        fetch(process.env.REACT_APP_API + `users/${user.userName}/posts`)
+        fetch(url + `users/${user.userName}/posts`)
         .then(response => response.json())
         .then(data => {
             this.setState({posts: data});

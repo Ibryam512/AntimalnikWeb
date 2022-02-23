@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { CardGroup } from 'react-bootstrap';
 import { UserDesign } from './UserDesign';
 import { roleType } from './../enums/roleType';
+import { url } from './../utils/auth';
 
 export class Users extends Component {
 	constructor(props) {
@@ -21,7 +22,7 @@ export class Users extends Component {
 	  }
 
     refreshUsers() {
-        fetch(process.env.REACT_APP_API + 'users')
+        fetch(url + 'users')
         .then(response => response.json())
         .then(data => {
             this.setState({users: data});

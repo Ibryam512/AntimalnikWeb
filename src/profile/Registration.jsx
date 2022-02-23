@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Form, Row, Col, InputGroup, Button } from 'react-bootstrap';
+import { url } from './../utils/auth';
 import axios from 'axios';
 import './../App.css';
 
@@ -20,7 +21,7 @@ export class Registration extends Component {
         if (this.state.validated === true && this.checkIfFieldsAreEmpty() && this.checkIfPasswordsAreEqual()) {
             e.preventDefault();
             const { data } = this.state;
-            axios.post(process.env.REACT_APP_API + 'users', data)
+            axios.post(url + 'users', data)
                 .then((result) => {
                     console.log(result);
                 })

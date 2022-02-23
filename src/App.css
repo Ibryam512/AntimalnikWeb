@@ -69,6 +69,15 @@ body {
 	padding-top: 20%;
 }
 
+.question {
+	text-align: center;
+}
+
+.carousel {
+	width: 80%;
+	height: 30%;
+}
+
 .post {
 	align-items: center;
     background: rgb(248, 241, 241);
@@ -93,11 +102,6 @@ body {
 .post-message-button {
 	width: 30%;
 	margin-left: 35%;
-}
-
-.question {
-	text-align: center;
-	margin: 0 auto;
 }
 
 .message {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CardGroup, Button, ButtonToolbar } from 'react-bootstrap';
 import { AddPost } from './AddPost';
+import { url } from './../utils/auth';
 import Post from './Post';
 
 export class Posts extends Component {
@@ -19,7 +20,7 @@ export class Posts extends Component {
 	  }
 
     refreshPosts() {
-        fetch(process.env.REACT_APP_API + 'posts')
+        fetch(url + 'posts')
         .then(response => response.json())
         .then(data => {
             this.setState({posts: this.filterPosts(data)});

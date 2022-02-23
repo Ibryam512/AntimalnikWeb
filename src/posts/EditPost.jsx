@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Row, Col, Form} from 'react-bootstrap';
 import { postType } from './../enums/postType';
+import { url } from './../utils/auth';
 import axios from 'axios'; 
 
 export class EditPost extends Component {
@@ -18,7 +19,7 @@ export class EditPost extends Component {
     editPost(e) {
         e.preventDefault();
         const { data } = this.state;
-        axios.put(process.env.REACT_APP_API + 'posts', data)
+        axios.put(url + 'posts', data)
             .then((result) => {
                 this.props.onHide();
                 alert(result);
@@ -28,7 +29,7 @@ export class EditPost extends Component {
 
     deletePost(e) {
         e.preventDefault();
-        axios.delete(process.env.REACT_APP_API + 'posts/' + this.state.data.id)
+        axios.delete(url + 'posts/' + this.state.data.id)
             .then(() => {
                 this.props.onHide();
             });

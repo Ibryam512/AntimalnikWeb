@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
-import { Form, Row, Col, InputGroup, Button } from 'react-bootstrap'
+import { Form, Row, Col, InputGroup, Button } from 'react-bootstrap';
+import { url } from './../utils/auth';
 import axios from 'axios';
 import './../App.css';
 
@@ -20,7 +21,7 @@ export class Login extends Component {
         if (this.state.validated === true && this.checkIfFieldsAreEmpty()) {
             e.preventDefault();
             const { data } = this.state;
-            axios.post(process.env.REACT_APP_API + 'users/login', data)
+            axios.post(url + 'users/login', data)
                 .then((result) => {
                     if (result.data.status === 200) {
                         sessionStorage.setItem('userData', JSON.stringify(result.data.userDetails));

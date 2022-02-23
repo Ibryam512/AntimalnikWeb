@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { url } from './../utils/auth';
 import Post from './../posts/Post';
 import './../App.css';
 
@@ -16,7 +17,7 @@ export class Profile extends Component {
 
     refreshPosts() {
         const { user } = this.state;
-        fetch(process.env.REACT_APP_API + `users/${user.userName}/posts`)
+        fetch(url + `users/${user.userName}/posts`)
         .then(response => response.json())
         .then(data => {
             this.setState({posts: data});

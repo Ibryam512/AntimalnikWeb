@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import  { Navigate } from 'react-router-dom';
-import { ToastContainer } from 'react-bootstrap'
+import { ToastContainer } from 'react-bootstrap';
+import { url } from './../utils/auth';
 import Message from './Message';
 
 export class Messages extends Component {
@@ -17,7 +18,7 @@ export class Messages extends Component {
 
     refreshMessages() {
 		let userName = JSON.parse(sessionStorage.getItem("userData")).userName;
-        fetch(process.env.REACT_APP_API + 'messages/' + userName + '/recieved')
+        fetch(url + 'messages/' + userName + '/recieved')
         .then(response => response.json())
         .then(data => {
             this.setState({messages: data});

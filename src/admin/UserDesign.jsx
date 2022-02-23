@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { roleType } from './../enums/roleType';
+import { url } from './../utils/auth';
 import axios from 'axios'; 
 
 export class UserDesign extends Component {
@@ -19,12 +20,12 @@ export class UserDesign extends Component {
         else {
             this.props.user.role = roleType.user;
         }
-        axios.put(process.env.REACT_APP_API + 'users', this.props.user);
+        axios.put(url + 'users', this.props.user);
     }
 
     deleteUser(e) {
         e.preventDefault();
-        axios.delete(process.env.REACT_APP_API + 'users/' + this.props.user.userName);
+        axios.delete(url + 'users/' + this.props.user.userName);
     }
 
     printButtons() {

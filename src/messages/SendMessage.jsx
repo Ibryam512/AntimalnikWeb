@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button, Row, Col, Form} from 'react-bootstrap';
+import { url } from './../utils/auth';
 import axios from 'axios'; 
 
 export class SendMessage extends Component {
@@ -18,7 +19,7 @@ export class SendMessage extends Component {
         const { data } = this.state;
         //поради неясна причина в обекта data property-то reciever е празно
         data.reciever = this.props.reciever;
-        axios.post(process.env.REACT_APP_API + 'messages/send', data)
+        axios.post(url + 'messages/send', data)
             .then((result) => {
                 this.props.onHide();
                 alert(result);

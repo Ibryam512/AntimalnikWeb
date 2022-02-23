@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Row, Col, Form} from 'react-bootstrap';
 import { postType } from './../enums/postType';
+import { url } from './../utils/auth';
 import axios from 'axios'; 
 
 export class AddPost extends Component {
@@ -19,7 +20,7 @@ export class AddPost extends Component {
         e.preventDefault();
         const { data } = this.state;
         data.postType = this.props.postType;
-        axios.post(process.env.REACT_APP_API + 'posts', data)
+        axios.post(url + 'posts', data)
             .then(() => {
                 this.props.onHide();
             });
