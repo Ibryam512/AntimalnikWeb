@@ -1,6 +1,6 @@
 body {
     background: #654ea3;
-    background: linear-gradient(to right, #38C27A, #2ebbdf);
+    background: linear-gradient(to right, #38C27A, #2EBBDF);
     overflow-x: hidden
 }
 
@@ -73,9 +73,19 @@ body {
 	text-align: center;
 }
 
+.answer {
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
 .carousel {
-	width: 80%;
+	width: 100%;
 	height: 30%;
+}
+
+.carousel-element {
+	height: 150px;
+	width: 100%;
 }
 
 .post {
@@ -94,9 +104,9 @@ body {
 }
 
 .post-item {
-	display: flex;
-  	align-items: center;
-  	justify-content: center;
+	text-align: center;
+	margin-left: 2%;
+	margin-right: 2%;
 }
 
 .post-message-button {

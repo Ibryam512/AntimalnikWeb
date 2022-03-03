@@ -82,7 +82,7 @@ export class FullPost extends Component {
 
     renderDeletePostButton() {
         let userData = JSON.parse(sessionStorage.getItem("userData"));
-        if (userData !== null && (userData.role === roleType.user)) {
+        if (userData !== null && (userData.role !== roleType.user)) {
             return (
                 <Button variant='outline-danger' style={{marginTop: "2%"}} className="post-message-button" onClick={this.deletePost}>
                     Изтрий пост

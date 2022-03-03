@@ -37,6 +37,14 @@ export class UserDesign extends Component {
                 </ButtonToolbar>
             );
         }
+        else {
+            return(
+                <ButtonToolbar>
+                    <Button variant="outline-primary" className="button" onClick={this.upgradeUser} disabled>{(this.props.user.role === roleType.user ? "Направи модератор" : "Направи потребител")}</Button>
+                    <Button variant="outline-danger" className="button" onClick={this.deleteUser} disabled>Изтрий потребител</Button>
+                </ButtonToolbar>
+            );
+        }
     }
 
 	render () {

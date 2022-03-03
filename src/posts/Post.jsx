@@ -35,7 +35,7 @@ export default class Post extends Component {
       description = description.slice(0,30) + '...';
     }
     let uploadDate = new Date(this.props.date);
-    let dateToShow = `${uploadDate.getDate()}/${uploadDate.getMonth()}/${uploadDate.getFullYear()}`;
+    let dateToShow = `${uploadDate.getDate()}/${uploadDate.getMonth() + 1}/${uploadDate.getFullYear()}`;
 		return (
       <Card style={{ margin: "1% 1% 1% 1%"}}>
         <Card.Img variant="top" src="holder.js/100px160" />
