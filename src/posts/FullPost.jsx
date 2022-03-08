@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams, Navigate } from 'react-router-dom';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { SendMessage } from './../messages/SendMessage';
+import { postType } from './../enums/postType';
 import { roleType } from './../enums/roleType';
 import { url } from './../utils/auth';
 
@@ -20,7 +21,7 @@ export class FullPost extends Component {
 	constructor(props) {
 		super(props);
         this.state = {
-            post: {title: "", description: "", user: {userName: ""}},
+            post: {title: "", description: "", user: {userName: ""}, postType, price: 1.00},
             sendMessageShow: false,
             logged: false
         };
@@ -99,6 +100,9 @@ export class FullPost extends Component {
                 <h1 className="post-item">{post.title}</h1>
                 <p className="post-item">{post.description}</p>
                 <p className="post-item"><b>{post.user.userName}</b></p>
+                {(post.postType === postType.ad)
+                ? <p className="post-item">Цена: {post.price}</p>
+                : <p className="post-item">Изгубена вещ</p>}
                 {this.renderSendMessageButton()}
                 {this.renderDeletePostButton()}
             </div>

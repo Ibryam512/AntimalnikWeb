@@ -14,7 +14,7 @@ export default class Post extends Component {
   }
 
   renderEditAndDeleteButtons() {
-    if (this.props.edit === true) {
+    if (this.props.edit) {
       let editPostClose = () => this.setState({editPostShow: false});
       return (
         <ButtonToolbar>
@@ -37,8 +37,7 @@ export default class Post extends Component {
     let uploadDate = new Date(this.props.date);
     let dateToShow = `${uploadDate.getDate()}/${uploadDate.getMonth() + 1}/${uploadDate.getFullYear()}`;
 		return (
-      <Card style={{ margin: "1% 1% 1% 1%"}}>
-        <Card.Img variant="top" src="holder.js/100px160" />
+      <Card style={{ margin: "1% 1% 1% 1%", borderRadius: "10px", minWidth: "40%"}}>
         <Card.Body>
           <Card.Title>{this.props.title}</Card.Title>
           <Card.Text>

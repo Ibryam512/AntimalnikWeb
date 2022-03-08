@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navigate } from 'react-router-dom';
-import { Form, Row, Col, InputGroup, Button } from 'react-bootstrap';
+import { Alert, Form, Row, Col, InputGroup, Button } from 'react-bootstrap';
 import { url } from './../utils/auth';
 import axios from 'axios';
 import './../App.css';
@@ -10,7 +10,8 @@ export class Login extends Component {
         super(props);
         this.state = {
             validated: false,
-            data: {userName: '', password: ''}
+            data: {userName: '', password: ''},
+            showError: false
           };
           this.Login = this.Login.bind(this);
           this.onChange = this.onChange.bind(this);
@@ -28,7 +29,7 @@ export class Login extends Component {
                         return <Navigate to="/profile" />
                     }
                     else {
-                        alert(result.data.message);
+                        this.showError(result.data.message);
                     }
                 });
         }
@@ -55,6 +56,18 @@ export class Login extends Component {
             return true;
         }
         return false;
+    }
+
+    showError(message) {
+        this.setState({showError: true})
+        return (
+            <Alert variant="danger" onClose={() => this.setState({showError: false})} dismissible>
+                <Alert.Heading>Грешка!</Alert.Heading>
+                <p>
+                    {message}
+                </p>
+            </Alert>
+        );
     }
 
     render() {
@@ -104,6 +117,7 @@ export class Login extends Component {
                 </Row>
                 <Button type="submit" className="item-button">Влез</Button>
             </Form>
+            
         );
     }
 }

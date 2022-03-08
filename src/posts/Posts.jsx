@@ -68,12 +68,14 @@ export class Posts extends Component {
 
 	render () {
         const { posts } = this.state;
-
+        let sortedPosts = posts.sort((a, b) => {
+            return new Date(b.addDate) - new Date(a.addDate);
+        });
 	    return (
             <div>
                 <CardGroup>
-                    {   posts.length > 0
-                        ? posts.map(post => this.renderPost(post.id, post.title, post.description, post.addDate))
+                    {   sortedPosts.length > 0
+                        ? sortedPosts.map(post => this.renderPost(post.id, post.title, post.description, post.addDate))
                         : <p style={{margin: "0 auto"}}>Няма качени постове.</p>
                     }
                 </CardGroup>

@@ -36,16 +36,19 @@ export class Navigation extends Component {
             <Navbar bg="dark" variant="dark" collapseOnSelect expand="lg">
                 <Container>
                     <Navbar.Brand href="#home">Антималник</Navbar.Brand>
-                    <Nav className="me-auto">
-                        <Nav.Link as={Link} to="/">Обяви</Nav.Link>
-                        <Nav.Link as={Link} to="/lost-things">Изгубени вещи</Nav.Link>
-                        <Nav.Link as={Link} to="/messages">Съобщения</Nav.Link>
-                        <Nav.Link as={Link} to="/questions">Въпроси</Nav.Link>
-                        {this.showPageWithUsers()}
-                    </Nav>
-                    <Nav>
-                        {this.showUserPage()}
-                    </Nav>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link as={Link} to="/">Обяви</Nav.Link>
+                            <Nav.Link as={Link} to="/lost-things">Изгубени вещи</Nav.Link>
+                            <Nav.Link as={Link} to="/messages">Съобщения</Nav.Link>
+                            <Nav.Link as={Link} to="/questions">Въпроси</Nav.Link>
+                            {this.showPageWithUsers()}
+                        </Nav>
+                        <Nav>
+                            {this.showUserPage()}
+                        </Nav>
+                    </Navbar.Collapse>
                 </Container>
             </Navbar>
         )
