@@ -11,27 +11,32 @@ export class Login extends Component {
         this.state = {
             validated: false,
             data: {userName: '', password: ''},
-            showError: false
+            showError: false,
+            message: ''
           };
           this.Login = this.Login.bind(this);
           this.onChange = this.onChange.bind(this);
     }
 
     Login(e) {
-        this.validate(e);
-        if (this.state.validated === true && this.checkIfFieldsAreEmpty()) {
+        if (this.checkIfFieldsAreEmpty()) {
             e.preventDefault();
             const { data } = this.state;
             axios.post(url + 'users/login', data)
                 .then((result) => {
                     if (result.data.status === 200) {
                         sessionStorage.setItem('userData', JSON.stringify(result.data.userDetails));
+                        window.location.reload();
                         return <Navigate to="/profile" />
                     }
                     else {
-                        this.showError(result.data.message);
+                        this.setState({showError: true});
+                        this.setState({message: result.data.message});
                     }
                 });
+        }
+        else {
+            this.validate(e);
         }
     }
 
@@ -59,15 +64,16 @@ export class Login extends Component {
     }
 
     showError(message) {
-        this.setState({showError: true})
-        return (
-            <Alert variant="danger" onClose={() => this.setState({showError: false})} dismissible>
-                <Alert.Heading>Грешка!</Alert.Heading>
-                <p>
-                    {message}
-                </p>
-            </Alert>
-        );
+        if (this.state.showError) {
+            return (
+                <Alert className="alert" show={this.state.showError} variant="danger" onClose={() => this.setState({showError: false})} dismissible>
+                    <Alert.Heading>Грешка!</Alert.Heading>
+                    <p>
+                        {message}
+                    </p>
+                </Alert>
+            );
+        }
     }
 
     render() {
@@ -79,6 +85,7 @@ export class Login extends Component {
         }
         
         return (
+            <div>
             <Form noValidate validated={validated} onSubmit={this.Login} className="form">
                 <h1 className="item">Вход</h1>
                 <Row className="mb-3 item">
@@ -117,6 +124,8 @@ export class Login extends Component {
                 </Row>
                 <Button type="submit" className="item-button">Влез</Button>
             </Form>
+            {this.showError(this.state.message)}
+           </div>
             
         );
     }

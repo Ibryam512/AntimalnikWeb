@@ -20,9 +20,8 @@ export class SendMessage extends Component {
         //поради неясна причина в обекта data property-то reciever е празно
         data.reciever = this.props.reciever;
         axios.post(url + 'messages/send', data)
-            .then((result) => {
+            .then(() => {
                 this.props.onHide();
-                alert(result);
             });
     }
 

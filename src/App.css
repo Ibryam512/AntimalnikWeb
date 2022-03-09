@@ -177,3 +177,8 @@ body {
 	font-size: 25px;
 	text-align: center;
 }
+
+.alert {
+	width: 50%;
+	margin: 2% auto;
+}

@@ -20,9 +20,8 @@ export class EditPost extends Component {
         e.preventDefault();
         const { data } = this.state;
         axios.put(url + 'posts', data)
-            .then((result) => {
+            .then(() => {
                 this.props.onHide();
-                alert(result);
             });            
         
     }

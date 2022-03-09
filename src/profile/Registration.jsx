@@ -15,25 +15,29 @@ export class Registration extends Component {
             errorMessage: "Моля, повторете паролата.",
             showError: false,
             showSuccess: false,
-            termsShow: false
+            termsShow: false,
+            message: ''
         };
         this.Registration = this.Registration.bind(this);
         this.onChange = this.onChange.bind(this);
     }
 
     Registration(e) {
-        this.validate(e);
-        if (this.state.validated && this.checkIfFieldsAreEmpty() && this.checkIfPasswordsAreEqual() && this.checkPasswordMinLength()) {
+        if (this.checkIfFieldsAreEmpty() && this.checkIfPasswordsAreEqual() && this.checkPasswordMinLength()) {
             e.preventDefault();
             const { data } = this.state;
             axios.post(url + 'users', data)
                 .then((result) => {
-                    if (JSON.stringify(result) === `The user with username ${data.userName} was added successfully.`) {
-                        this.showSuccess();
+                    if (result.status === 200) {
+                        this.setState({showSuccess: true});
                     } else {
-                        this.showError(JSON.stringify(result));
+                        this.setState({showError: true});
+                        this.setState({message: result.message});
                     }
-                })
+                });
+        }
+        else { 
+            this.validate(e);
         }
         
     }  
@@ -81,9 +85,8 @@ export class Registration extends Component {
     }
 
     showError(message) {
-        this.setState({showError: false})
         return (
-            <Alert variant="danger" onClose={() => this.setState({showError: false})} dismissible>
+            <Alert className="alert" show={this.state.showError} variant="danger" onClose={() => this.setState({showError: false})} dismissible>
                 <Alert.Heading>Грешка!</Alert.Heading>
                 <p>
                     {message}
@@ -93,9 +96,8 @@ export class Registration extends Component {
     }
 
     showSuccess() {
-        this.setState({showSuccess: false})
         return (
-            <Alert variant="success" onClose={() => this.setState({showSuccess: false})} dismissible>
+            <Alert className="alert" show={this.state.showSuccess} variant="success" onClose={() => this.setState({showSuccess: false})} dismissible>
                 <Alert.Heading>Успешна регистрация!</Alert.Heading>
                 <p>
                     Поздравления! Сега вие можете да си влезете във вашия акаунт.
@@ -114,111 +116,115 @@ export class Registration extends Component {
         }
 
         return (
-            <Form noValidate validated={validated} onSubmit={this.validate} className="form">
-                <h1 className="item">Регистрация</h1>
-                <Row className="mb-3 item">
-                    <Form.Group as={Col} md="7" controlId="validationCustom01">
-                        <Form.Label>Име</Form.Label>
-                        <Form.Control
-                            required
-                            type="text"
-                            placeholder="Име"
-                            name="firstName"
-                            value={data.firstName}
-                            onChange={this.onChange}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            Моля, напишете име.
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group as={Col} md="7" controlId="validationCustom02">
-                        <Form.Label>Фамилия</Form.Label>
-                        <Form.Control
-                            required
-                            type="text"
-                            placeholder="Фамилия"
-                            name="lastName"
-                            value={data.lastName}
-                            onChange={this.onChange}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            Моля, напишете фамилия.
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group as={Col} md="7" controlId="validationCustomUsername">
-                        <Form.Label>Потребителско име</Form.Label>
-                        <InputGroup hasValidation>
-                            <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+            <div>
+                {this.showError(this.state.message)}
+                {this.showSuccess()}
+                <Form noValidate validated={validated} onSubmit={this.Registration} className="form">
+                    <h1 className="item">Регистрация</h1>
+                    <Row className="mb-3 item">
+                        <Form.Group as={Col} md="7" controlId="validationCustom01">
+                            <Form.Label>Име</Form.Label>
                             <Form.Control
+                                required
                                 type="text"
-                                placeholder="Потребителско име"
-                                aria-describedby="inputGroupPrepend"
-                                name="userName"
-                                value={data.userName}
+                                placeholder="Име"
+                                name="firstName"
+                                value={data.firstName}
+                                onChange={this.onChange}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Моля, напишете име.
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group as={Col} md="7" controlId="validationCustom02">
+                            <Form.Label>Фамилия</Form.Label>
+                            <Form.Control
+                                required
+                                type="text"
+                                placeholder="Фамилия"
+                                name="lastName"
+                                value={data.lastName}
+                                onChange={this.onChange}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Моля, напишете фамилия.
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group as={Col} md="7" controlId="validationCustomUsername">
+                            <Form.Label>Потребителско име</Form.Label>
+                            <InputGroup hasValidation>
+                                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Потребителско име"
+                                    aria-describedby="inputGroupPrepend"
+                                    name="userName"
+                                    value={data.userName}
+                                    onChange={this.onChange}
+                                    required
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    Моля, напишете потребителско име.
+                                </Form.Control.Feedback>
+                            </InputGroup>
+                        </Form.Group>
+                        <Form.Group as={Col} md="7" controlId="validationCustom03">
+                            <Form.Label>Имейл</Form.Label>
+                            <Form.Control
+                                type="email"
+                                placeholder="Имейл"
+                                name="email"
+                                value={data.email}
                                 onChange={this.onChange}
                                 required
                             />
                             <Form.Control.Feedback type="invalid">
-                                Моля, напишете потребителско име.
+                                Моля, напишете имейл.
                             </Form.Control.Feedback>
-                        </InputGroup>
-                    </Form.Group>
-                    <Form.Group as={Col} md="7" controlId="validationCustom03">
-                        <Form.Label>Имейл</Form.Label>
-                        <Form.Control 
-                        type="email" 
-                        placeholder="Имейл"
-                        name="email"
-                        value={data.email}
-                        onChange={this.onChange}
-                        required 
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            Моля, напишете имейл.
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group as={Col} md="7" controlId="validationCustom04">
-                        <Form.Label>Парола</Form.Label>
-                        <Form.Control
-                            type="password"
-                            placeholder="Парола"
-							name="password"
-                            value={data.password}
-                            onChange={this.onChange}
+                        </Form.Group>
+                        <Form.Group as={Col} md="7" controlId="validationCustom04">
+                            <Form.Label>Парола</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="Парола"
+                                name="password"
+                                value={data.password}
+                                onChange={this.onChange}
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                Моля, напишете парола.
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group as={Col} md="7" controlId="validationCustom05">
+                            <Form.Label>Повтори паролата</Form.Label>
+                            <Form.Control
+                                type="password"
+                                placeholder="Повтори паролата"
+                                name="passwordConfirm"
+                                value={data.passwordConfirm}
+                                onChange={this.onChange}
+                                required
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {this.state.errorMessage}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Row>
+                    <Form.Group className="mb-4 item">
+                        <Form.Check
                             required
+                            label="Съгласявам се с условията за ползване"
+                            feedback="Трябва да се съгласите с условията за ползване преди да се регистрирате."
+                            feedbackType="invalid"
+                            onClick={() => this.setState({ termsShow: true })}
                         />
-                        <Form.Control.Feedback type="invalid">
-                            Моля, напишете парола.
-                        </Form.Control.Feedback>
+                        <Terms show={this.state.termsShow}
+                            onHide={termsClose} />
                     </Form.Group>
-                    <Form.Group as={Col} md="7" controlId="validationCustom05">
-                        <Form.Label>Повтори паролата</Form.Label>
-                        <Form.Control
-                            type="password"
-                            placeholder="Повтори паролата"
-                            name="passwordConfirm"
-                            value={data.passwordConfirm}
-                            onChange={this.onChange}
-                            required
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {this.state.errorMessage}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                </Row>
-                <Form.Group className="mb-4 item">
-                    <Form.Check
-                        required
-                        label="Съгласявам се с условията за ползване"
-                        feedback="Трябва да се съгласите с условията за ползване преди да се регистрирате."
-                        feedbackType="invalid"
-                        onClick={() => this.setState({termsShow: true})}
-                    />
-                    <Terms show={this.state.termsShow}
-                    onHide={termsClose}/>
-                </Form.Group>
-                <Button type="submit" className="item-button">Регистрирай се</Button>
-            </Form>
+                    <Button type="submit" className="item-button">Регистрирай се</Button>
+                </Form>
+            </div>
         );
     }
 }
