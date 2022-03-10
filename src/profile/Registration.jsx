@@ -12,7 +12,6 @@ export class Registration extends Component {
         this.state = {
             validated: false,
             data: {userName: '', firstName: '', lastName: '', email: '', password: '', passwordConfirm: ''},
-            errorMessage: "Моля, повторете паролата.",
             showError: false,
             showSuccess: false,
             termsShow: false,
@@ -64,7 +63,6 @@ export class Registration extends Component {
         && this.state.data.password !== '' && this.state.data.passwordConfirm !== '') {
             return true;
         }
-        this.setState({errorMessage: "Моля, повторете паролата."});
         return false;
     }
 
@@ -72,7 +70,8 @@ export class Registration extends Component {
         if (this.state.data.password === this.state.data.passwordConfirm) {
             return true;
         }
-        this.setState({errorMessage: "Паролите не съвпадат."});
+        this.setState({showError: true});
+        this.setState({message: "Паролите не съвпадат!"});
         return false;
     }
 
@@ -80,30 +79,37 @@ export class Registration extends Component {
         if (this.state.data.password.length >= 6) {
             return true;
         }
-        this.setState({errorMessage: "Паролата трябва да е минимум 6 символа."});
+        this.setState({showError: true});
+        this.setState({message: "Паролата трябва да е минимум 6 символа!"});
         return false;
     }
 
     showError(message) {
-        return (
-            <Alert className="alert" show={this.state.showError} variant="danger" onClose={() => this.setState({showError: false})} dismissible>
-                <Alert.Heading>Грешка!</Alert.Heading>
-                <p>
-                    {message}
-                </p>
-            </Alert>
-        );
+        if (this.state.showError) {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            return (
+                <Alert className="alert" show={this.state.showError} variant="danger" onClose={() => this.setState({ showError: false })} dismissible>
+                    <Alert.Heading>Грешка!</Alert.Heading>
+                    <p>
+                        {message}
+                    </p>
+                </Alert>
+            );
+        }
     }
 
     showSuccess() {
-        return (
-            <Alert className="alert" show={this.state.showSuccess} variant="success" onClose={() => this.setState({showSuccess: false})} dismissible>
-                <Alert.Heading>Успешна регистрация!</Alert.Heading>
-                <p>
-                    Поздравления! Сега вие можете да си влезете във вашия акаунт.
-                </p>
-            </Alert>
-        );
+        if (this.state.showSuccess) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return (
+                <Alert className="alert" show={this.state.showSuccess} variant="success" onClose={() => this.setState({ showSuccess: false })} dismissible>
+                    <Alert.Heading>Успешна регистрация!</Alert.Heading>
+                    <p>
+                        Поздравления! Сега вие можете да си влезете във вашия акаунт.
+                    </p>
+                </Alert>
+            );
+        }
     }
 
     render() {
@@ -207,7 +213,7 @@ export class Registration extends Component {
                                 required
                             />
                             <Form.Control.Feedback type="invalid">
-                                {this.state.errorMessage}
+                                Моля, повторете паролата.
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Row>
