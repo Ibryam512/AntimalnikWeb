@@ -54,6 +54,7 @@ export class Messages extends Component {
         }
 
         const { messages } = this.state;
+        if (messages.length == 0) return (<p style={{textAlign: "center"}}>Нямаш нови съобшения.</p>);
         messages.sort((a, b) => {
             return new Date(b.sentDate) - new Date(a.sentDate)
         });

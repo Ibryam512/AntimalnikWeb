@@ -6,6 +6,7 @@ import { SendMessage } from './../messages/SendMessage';
 import { postType } from './../enums/postType';
 import { roleType } from './../enums/roleType';
 import { url } from './../utils/auth';
+import PageNotFound from './../404-page';
 
 export default function GetId() {
     const { id } = useParams();
@@ -34,7 +35,12 @@ export class FullPost extends Component {
 
     getPost() {
         fetch(url + 'posts/' + this.props.id)
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            return <PageNotFound/>
+        })
         .then(data => {
             this.setState({post: data});
         });
@@ -45,19 +51,20 @@ export class FullPost extends Component {
         axios.delete(url + 'posts/' + this.props.id)
             .then(() => {
                 window.location.reload();
+                return <PageNotFound/>
             });
     }
 
     componentDidMount() {
         if (this.state.post === null) {
-            return <Navigate to="/"/>
+            return <PageNotFound/>
         }
         this.getPost();
     }
 
     componentDidUpdate() {
         if (this.state.post === null) {
-            return <Navigate to="/"/>
+            return <PageNotFound/>
         }
         this.getPost();
     }
@@ -94,6 +101,7 @@ export class FullPost extends Component {
 
 	render () {
         const { post } = this.state;
+        if (post === null) return <Navigate to='/'/>
 
 	    return (
             <div className="post">

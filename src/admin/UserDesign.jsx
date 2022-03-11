@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, ButtonToolbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { roleType } from './../enums/roleType';
 import { url } from './../utils/auth';
 import axios from 'axios'; 
@@ -48,7 +49,7 @@ export class UserDesign extends Component {
     }
 
 	render () {
-        let link = `users/${this.props.user.userName}`;
+        let link = `/admin/users/${this.props.user.userName}`;
         let user = this.props.user;
         return (
             <div className="user">
@@ -62,7 +63,7 @@ export class UserDesign extends Component {
                             ? "Модератор"
                             : "Админ"))}</b>
                 </p>
-                <a href={link} className="link-user">Детайли</a>
+                <Link to={link} className="link-user">Детайли</Link>
                 {this.printButtons()}
             </div>
         );
