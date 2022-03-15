@@ -50,9 +50,9 @@ export class EditPost extends Component {
         if (this.props.postType === postType.ad) {
             return (
                 <Form.Group controlId="PostPrice" className="add-edit-post">
-                    <Form.Label>Цена</Form.Label>
+                    <Form.Label>Цена (в лева)</Form.Label>
                     <Form.Control
-                        type="text"
+                        type="number"
                         name="price"
                         placeholder="Цена"
                         value={data.price}

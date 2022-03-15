@@ -109,7 +109,7 @@ export class FullPost extends Component {
                 <p className="post-item">{post.description}</p>
                 <p className="post-item"><b>{post.user.userName}</b></p>
                 {(post.postType === postType.ad)
-                ? <p className="post-item">Цена: {post.price}</p>
+                ? <p className="post-item">Цена: {post.price} лева</p>
                 : <p className="post-item">Изгубена вещ</p>}
                 {this.renderSendMessageButton()}
                 {this.renderDeletePostButton()}
