@@ -18,7 +18,7 @@ function App() {
     <Router>
       <Navigation />
       <Switch>
-        <Route path='/' element={<Poss type={postType.ad}/>} exact />
+        <Route path='/' element={<Posts type={postType.ad}/>} exact />
         <Route path='/lost-things' element={<Posts type={postType.lostThing}/>} />
         <Route path='/messages' element={<Messages/>} />
         <Route path='/questions' element={<Questions/>} />
