@@ -1,6 +1,6 @@
 {
   "name": "antimalnik-web",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
@@ -12,7 +12,7 @@
     "react-bootstrap": "^2.0.3",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.1.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
