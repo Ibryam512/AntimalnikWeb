@@ -40,7 +40,6 @@ export class SendMessage extends Component {
         return (
             <Modal
             {...this.props}
-            aria-tabelledby="contained-modal-title-vcenter"
             centered
             >
                 <Modal.Header clooseButton>

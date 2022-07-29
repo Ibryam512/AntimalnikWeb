@@ -26,13 +26,13 @@ export class Messages extends Component {
     }
 
     componentDidMount() {
-        if (this.state.logged === true) {
+        if (this.state.logged) {
             this.refreshMessages();
         }
     }
 
     componentDidUpdate() {
-        if (this.state.logged === true) {
+        if (this.state.logged) {
             this.refreshMessages();
         }
     }
@@ -54,7 +54,7 @@ export class Messages extends Component {
         }
 
         const { messages } = this.state;
-        if (messages.length == 0) return (<p style={{textAlign: "center"}}>Нямаш нови съобщения.</p>);
+        if (messages.length === 0) return (<p style={{textAlign: "center"}}>Нямаш нови съобщения.</p>);
         messages.sort((a, b) => {
             return new Date(b.sentDate) - new Date(a.sentDate)
         });
